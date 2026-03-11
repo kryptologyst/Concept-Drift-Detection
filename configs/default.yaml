@@ -1,0 +1,70 @@
+# Default configuration for concept drift detection experiments
+
+# Random seed for reproducibility
+random_seed: 42
+
+# Dataset configuration
+dataset:
+  name: "iris"  # Options: iris, wine, breast_cancer, synthetic
+  test_size: 0.3
+
+# Drift configuration
+drift:
+  scenario: "gradual"  # Options: gradual, sudden, recurring
+  strength: 0.3
+
+# Detector configurations
+detectors:
+  psi:
+    enabled: true
+    bins: 10
+    threshold: 0.2
+    
+  ks:
+    enabled: true
+    threshold: 0.05
+    
+  chi_square:
+    enabled: false
+    threshold: 0.05
+    
+  anderson_darling:
+    enabled: false
+    threshold: 0.05
+    
+  mmd:
+    enabled: true
+    kernel: "rbf"
+    gamma: null  # Auto-detect using median heuristic
+    threshold: 0.1
+    
+  wasserstein:
+    enabled: true
+    threshold: 0.1
+    
+  adwin:
+    enabled: true
+    delta: 0.002
+    min_window_size: 5
+    max_window_size: 1000
+    
+  page_hinkley:
+    enabled: true
+    threshold: 5.0
+    min_samples: 30
+    
+  ddm:
+    enabled: false
+    warning_level: 2.0
+    drift_level: 3.0
+    min_samples: 30
+
+# Evaluation configuration
+evaluation:
+  n_runs: 5  # Number of runs for stability evaluation
+  
+# Visualization configuration
+visualization:
+  style: "seaborn-v0_8"
+  figsize: [12, 6]
+  dpi: 300
